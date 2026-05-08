@@ -1223,7 +1223,10 @@ pub trait ByteOrder:
         {
             let dst = unsafe {
                 const _: () = assert!(align_of::<u64>() <= align_of::<f64>());
-                slice::from_raw_parts_mut(dst.as_mut_ptr() as *mut u64, dst.len())
+                slice::from_raw_parts_mut(
+                    dst.as_mut_ptr() as *mut u64,
+                    dst.len(),
+                )
             };
             Self::read_u64_into(src, dst);
         }
